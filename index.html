@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurora Bloom — Artist Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400&family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --blush: #f9d0dc;
+    --rose: #e8849a;
+    --deep-rose: #c45c76;
+    --petal: #fce8ef;
+    --cream: #fff8f9;
+    --mauve: #d4a0ae;
+    --dusty: #b87a8a;
+    --text-dark: #3d1f28;
+    --text-mid: #7a4052;
+    --text-soft: #a87080;
+    --white: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(255,248,249,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(232,132,154,0.2);
+  }
+  .logo {
+    font-family: 'Josefin Sans', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 2.2rem;
+    color: var(--deep-rose);
+    letter-spacing: 0.18em;
+  }
+  .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--deep-rose); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, #fff0f4 0%, #fce8ef 40%, #f9d0dc 100%);
+    padding-top: 80px;
+  }
+  .hero-deco {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .deco-1 { width: 420px; height: 420px; background: rgba(232,132,154,0.12); top: -80px; right: -100px; }
+  .deco-2 { width: 280px; height: 280px; background: rgba(212,160,174,0.15); bottom: 60px; left: -60px; }
+  .deco-3 { width: 160px; height: 160px; background: rgba(249,208,220,0.4); top: 30%; left: 10%; }
+  .hero-content { text-align: center; position: relative; z-index: 1; max-width: 700px; padding: 0 2rem; }
+  .hero-eyebrow {
+    font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--rose); margin-bottom: 1.4rem; display: block;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.2rem, 8vw, 5.5rem);
+    line-height: 1.05;
+    color: var(--text-dark);
+    margin-bottom: 1.4rem;
+  }
+  .hero-title em { color: var(--deep-rose); font-style: italic; }
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: var(--text-mid);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--deep-rose); color: white;
+    border: none; padding: 0.85rem 2.2rem;
+    border-radius: 50px;
+    font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--dusty); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent; color: var(--deep-rose);
+    border: 1.5px solid var(--rose); padding: 0.85rem 2.2rem;
+    border-radius: 50px;
+    font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { background: var(--petal); transform: translateY(-2px); }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 6rem 2rem; }
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--rose); margin-bottom: 0.6rem; display: block; text-align: center;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    color: var(--text-dark);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .section-title em { color: var(--deep-rose); font-style: italic; }
+  .section-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 300;
+    color: var(--text-soft); text-align: center;
+    max-width: 520px; margin: 0 auto 3.5rem;
+    line-height: 1.7;
+  }
+
+  /* ── GALLERY ── */
+  #gallery { background: var(--white); }
+  .gallery-filters { display: flex; gap: 0.7rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.8rem; }
+  .filter-btn {
+    padding: 0.45rem 1.4rem; border-radius: 50px;
+    border: 1.5px solid var(--blush);
+    background: transparent; color: var(--text-mid);
+    font-size: 0.78rem; letter-spacing: 0.08em;
+    cursor: pointer; transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--deep-rose); color: white; border-color: var(--deep-rose);
+  }
+  .gallery-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.4rem;
+  }
+  .gallery-item {
+    border-radius: 16px; overflow: hidden;
+    position: relative; cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .gallery-item:hover { transform: translateY(-6px); }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-placeholder {
+    width: 100%; aspect-ratio: 4/5;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-style: italic;
+    color: var(--dusty);
+    letter-spacing: 0.05em;
+    position: relative;
+  }
+  .gallery-placeholder img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: rgba(196,92,118,0.82);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.3s;
+    padding: 1.5rem; text-align: center;
+  }
+  .gallery-overlay h3 {
+    font-family: 'Playfair Display', serif;
+    color: white; font-size: 1.2rem; margin-bottom: 0.3rem;
+  }
+  .gallery-overlay p {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  /* painting placeholder gradients */
+  .p1 { background: linear-gradient(135deg, #f9c4d0 0%, #e8849a 40%, #c45c76 100%); }
+  .p2 { background: linear-gradient(135deg, #fde6c0 0%, #f5b8c4 60%, #dca0b8 100%); }
+  .p3 { background: linear-gradient(135deg, #e8d5f0 0%, #c9a0d0 50%, #a878b8 100%); }
+  .p4 { background: linear-gradient(135deg, #fce0e8 0%, #f0a8b8 50%, #e07090 100%); }
+  .p5 { background: linear-gradient(135deg, #d8f0e8 0%, #b0d8c0 50%, #d4a0ae 100%); }
+  .p6 { background: linear-gradient(135deg, #fff0c0 0%, #f8d0b0 50%, #e8a8a0 100%); }
+
+  /* ── ABOUT ── */
+  #about { background: var(--petal); }
+  .about-inner {
+    max-width: 1000px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  }
+  .about-portrait {
+    width: 100%; aspect-ratio: 3/4;
+    border-radius: 60% 40% 60% 40% / 40% 60% 40% 60%;
+    background: linear-gradient(145deg, #f9d0dc, #e8849a, #c45c76);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem; font-style: italic; color: rgba(255,255,255,0.75);
+    overflow: hidden;
+  }
+  .about-portrait img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .about-content .section-title,
+  .about-content .section-label { text-align: left; }
+  .about-content .section-sub { text-align: left; margin: 0 0 2rem; }
+  .about-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 300; line-height: 1.85;
+    color: var(--text-mid); margin-bottom: 1.4rem;
+  }
+  .about-stats { display: flex; gap: 2rem; margin-top: 2rem; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; color: var(--deep-rose); display: block;
+  }
+  .stat-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-soft); }
+
+  /* ── SHOP ── */
+  #shop { background: var(--white); }
+  .shop-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.8rem;
+  }
+  .shop-card {
+    border-radius: 16px; overflow: hidden;
+    border: 1px solid rgba(232,132,154,0.2);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .shop-card:hover { transform: translateY(-5px); box-shadow: 0 12px 32px rgba(196,92,118,0.12); }
+  .shop-img {
+    width: 100%; aspect-ratio: 1;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem; font-style: italic; color: rgba(255,255,255,0.6);
+  }
+  .shop-info { padding: 1rem 1.2rem; background: white; }
+  .shop-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem; color: var(--text-dark); margin-bottom: 0.3rem;
+  }
+  .shop-desc { font-size: 0.78rem; color: var(--text-soft); margin-bottom: 0.7rem; }
+  .shop-price { font-size: 1rem; color: var(--deep-rose); }
+  .shop-btn {
+    display: block; width: 100%;
+    margin-top: 0.7rem;
+    padding: 0.55rem; border-radius: 50px;
+    background: var(--petal); color: var(--deep-rose);
+    border: 1.5px solid var(--blush);
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; text-align: center; text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.2s;
+  }
+  .shop-btn:hover { background: var(--blush); }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--petal); }
+  .contact-inner { max-width: 580px; margin: 0 auto; }
+  .form-row { margin-bottom: 1.3rem; }
+  .form-label {
+    display: block; font-size: 0.75rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-mid); margin-bottom: 0.5rem;
+  }
+  .form-input, .form-textarea {
+    width: 100%; padding: 0.85rem 1.1rem;
+    border: 1.5px solid rgba(232,132,154,0.35);
+    border-radius: 12px;
+    background: white;
+    font-family: 'DM Sans', sans-serif; font-size: 0.92rem;
+    color: var(--text-dark);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .form-input:focus, .form-textarea:focus {
+    border-color: var(--rose);
+    box-shadow: 0 0 0 3px rgba(232,132,154,0.15);
+  }
+  .form-textarea { min-height: 140px; resize: vertical; }
+  .form-submit {
+    width: 100%; padding: 1rem;
+    background: var(--deep-rose); color: white;
+    border: none; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.2s, transform 0.15s;
+    margin-top: 0.5rem;
+  }
+  .form-submit:hover { background: var(--dusty); transform: translateY(-2px); }
+  .form-success {
+    display: none; text-align: center; padding: 1.5rem;
+    color: var(--deep-rose);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-style: italic;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--text-dark); color: rgba(255,255,255,0.6);
+    padding: 3rem 2rem; text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 1.5rem; color: var(--blush); margin-bottom: 1rem;
+  }
+  .footer-links {
+    display: flex; gap: 2rem; justify-content: center;
+    list-style: none; margin-bottom: 1.5rem; flex-wrap: wrap;
+  }
+  .footer-links a {
+    color: rgba(255,255,255,0.45); font-size: 0.75rem;
+    letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--blush); }
+  .footer-copy { font-size: 0.75rem; opacity: 0.4; }
+
+  /* ── DECORATIVE FLOWERS ── */
+  .flower { position: absolute; pointer-events: none; opacity: 0.18; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-portrait { max-width: 240px; margin: 0 auto; aspect-ratio: 1; border-radius: 50%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <div class="logo">Nysa Gupta</div>
+  <ul class="nav-links">
+    <li><a href="#gallery">Works</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-deco deco-1"></div>
+  <div class="hero-deco deco-2"></div>
+  <div class="hero-deco deco-3"></div>
+
+  <!-- decorative flower SVGs -->
+  <svg class="flower" style="top:18%;right:8%;width:90px;" viewBox="0 0 80 80">
+    <g transform="translate(40,40)">
+      <ellipse rx="10" ry="22" fill="#e8849a" transform="rotate(0)"/>
+      <ellipse rx="10" ry="22" fill="#e8849a" transform="rotate(45)"/>
+      <ellipse rx="10" ry="22" fill="#e8849a" transform="rotate(90)"/>
+      <ellipse rx="10" ry="22" fill="#e8849a" transform="rotate(135)"/>
+      <circle r="9" fill="#f9d0dc"/>
+    </g>
+  </svg>
+  <svg class="flower" style="bottom:20%;left:5%;width:60px;" viewBox="0 0 80 80">
+    <g transform="translate(40,40)">
+      <ellipse rx="8" ry="18" fill="#c45c76" transform="rotate(0)"/>
+      <ellipse rx="8" ry="18" fill="#c45c76" transform="rotate(60)"/>
+      <ellipse rx="8" ry="18" fill="#c45c76" transform="rotate(120)"/>
+      <circle r="7" fill="#fce8ef"/>
+    </g>
+  </svg>
+  <svg class="flower" style="top:60%;right:3%;width:50px;" viewBox="0 0 80 80">
+    <g transform="translate(40,40)">
+      <ellipse rx="7" ry="16" fill="#d4a0ae" transform="rotate(0)"/>
+      <ellipse rx="7" ry="16" fill="#d4a0ae" transform="rotate(72)"/>
+      <ellipse rx="7" ry="16" fill="#d4a0ae" transform="rotate(144)"/>
+      <ellipse rx="7" ry="16" fill="#d4a0ae" transform="rotate(216)"/>
+      <ellipse rx="7" ry="16" fill="#d4a0ae" transform="rotate(288)"/>
+      <circle r="6" fill="#fff0f4"/>
+    </g>
+  </svg>
+
+  <div class="hero-content">
+    <span class="hero-eyebrow">Paintings &amp; Prints</span>
+    <h1 class="hero-title">Where <em>dreams</em><br>bloom in color</h1>
+    <p class="hero-sub">Original oil and watercolor paintings inspired by the soft magic of petals, reverie, and the tender light of golden hours.</p>
+    <div class="hero-btns">
+      <a href="#gallery" class="btn-primary">View Gallery</a>
+      <a href="#shop" class="btn-ghost">Shop Prints</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GALLERY ══ -->
+<section id="gallery">
+  <span class="section-label">Gallery</span>
+  <h2 class="section-title">Recent <em>Works</em></h2>
+  <p class="section-sub">A curated collection of original paintings, each one a small universe of feeling.</p>
+
+  <div class="gallery-filters">
+    <button class="filter-btn active" onclick="filterGallery(this, 'all')">All</button>
+    <button class="filter-btn" onclick="filterGallery(this, 'oil')">Oil</button>
+    <button class="filter-btn" onclick="filterGallery(this, 'watercolor')">Watercolor</button>
+    <button class="filter-btn" onclick="filterGallery(this, 'mixed')">Mixed Media</button>
+    <button class="filter-btn" onclick="filterGallery(this, 'stilllife')">Still Life</button>
+  </div>
+
+  <div class="gallery-grid" id="galleryGrid">
+    <!--
+      TO ADD YOUR OWN PAINTINGS:
+      Replace the <div class="gallery-placeholder p1"> with:
+      <div class="gallery-placeholder">
+        <img src="your-image.jpg" alt="Painting title">
+        ...overlay stays the same...
+      </div>
+    -->
+    <div class="gallery-item" data-cat="oil">
+      <div class="gallery-placeholder p1">
+        <img src="waterfall.jpeg" alt="waterfall (Acrylic on Canvas)">
+        <div class="gallery-overlay"><h3>waterfall"</h3><p>Acrylic on Canvas · 18×24"</p></div>
+      </div>
+    </div>
+    <div class="gallery-item" data-cat="watercolor">
+      <div class="gallery-placeholder p2">
+        <img src="sun.jpeg" alt="sun streaming through trees in a jungle (acrylic on canvas)">
+        <div class="gallery-overlay"><h3>sun streaming through trees</h3><p>Acrylic · 12×16"</p></div>
+      </div>
+    </div>
+    <div class="gallery-item" data-cat="oil">
+      <div class="gallery-placeholder p3">
+        <img src="first.jpeg" alt="Blush Reverie">
+        <div class="gallery-overlay"><h3>jungle trees</h3><p>acrylic · 24×30"</p></div>
+      </div>
+    </div>
+    <div class="gallery-item" data-cat="mixed">
+      <div class="gallery-placeholder p4">
+        <img src="vase.jpeg" alt="Blush Reverie">
+        <div class="gallery-overlay"><h3>flower vase (glass)</h3><p>acrylic · 10×14"</p></div>
+      </div>
+    </div>
+    <div class="gallery-item" data-cat="watercolor">
+      <div class="gallery-placeholder p5">
+        <img src="jungle.jpeg" alt="Blush Reverie">
+        <div class="gallery-overlay"><h3>Sage &amp; Rose</h3><p>Watercolor · 9×12"</p></div>
+      </div>
+    </div>
+    <div class="gallery-item" data-cat="stilllife">
+      <div class="gallery-placeholder p6">
+        <span style="position:relative;z-index:0;opacity:0.45;font-size:0.85rem;">your painting here</span>
+        <div class="gallery-overlay"><h3>Golden Hour</h3><p>Oil on canvas · 20×20"</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-portrait">
+      <!--
+        TO ADD YOUR PHOTO:
+        Replace the span below with:
+        <img src="your-photo.jpg" alt="Your name">
+      -->
+      <img src="POrtfolio.jpeg" alt="Nysa Gupta">
+    </div>
+    <div class="about-content">
+      <span class="section-label">About</span>
+      <h2 class="section-title" style="text-align:left;">The <em>Artist</em></h2>
+      <p class="section-sub" style="text-align:left;margin-left:0;">
+        A little corner of the world where beauty is found in the quietest moments.
+      </p>
+      <p class="about-text">
+        Hello, I'm Nysa, a painter based in India endlessly inspired by the way light filters through petals and the gentle passage of seasons. My work explores tenderness, memory, and the dreamlike quality of everyday beauty.
+      </p>
+      <p class="about-text">
+        Each painting begins with a feeling, a color caught at dusk, the curve of a rose before it opens fully. I work primarily in oils and watercolor, letting the medium lead me somewhere softer than words.
+      </p>
+      <a href="#contact" class="btn-primary" style="display:inline-block;margin-top:0.5rem;">Say Hello</a>
+      <div class="about-stats">
+        <div class="stat-item">
+          <span class="stat-num">120+</span>
+          <span class="stat-label">Paintings</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">8 yrs</span>
+          <span class="stat-label">Creating</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">30+</span>
+          <span class="stat-label">Collectors</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SHOP ══ -->
+<section id="shop">
+  <span class="section-label">Shop</span>
+  <h2 class="section-title">Prints &amp; <em>Originals</em></h2>
+  <p class="section-sub">Bring a little bloom into your home. Every print is made to order with archival inks.</p>
+
+  <div class="shop-grid">
+    <div class="shop-card">
+      <div class="shop-img p1">
+        <span>your painting here</span>
+      </div>
+      <div class="shop-info">
+        <p class="shop-name">Blush Reverie — Print</p>
+        <p class="shop-desc">Giclée print · 12×16" · Archival paper</p>
+        <p class="shop-price">$48</p>
+        <a href="#contact" class="shop-btn">Enquire</a>
+      </div>
+    </div>
+    <div class="shop-card">
+      <div class="shop-img p3">
+        <span>your painting here</span>
+      </div>
+      <div class="shop-info">
+        <p class="shop-name">Lavender Dusk — Original</p>
+        <p class="shop-desc">Oil on canvas · 24×30" · Framed</p>
+        <p class="shop-price">$680</p>
+        <a href="#contact" class="shop-btn">Enquire</a>
+      </div>
+    </div>
+    <div class="shop-card">
+      <div class="shop-img p2">
+        <span>your painting here</span>
+      </div>
+      <div class="shop-info">
+        <p class="shop-name">Peach Bloom — Print</p>
+        <p class="shop-desc">Giclée print · 9×12" · Archival paper</p>
+        <p class="shop-price">$36</p>
+        <a href="#contact" class="shop-btn">Enquire</a>
+      </div>
+    </div>
+    <div class="shop-card">
+      <div class="shop-img p6">
+        <span>your painting here</span>
+      </div>
+      <div class="shop-info">
+        <p class="shop-name">Golden Hour — Original</p>
+        <p class="shop-desc">Oil on canvas · 20×20" · Unframed</p>
+        <p class="shop-price">$520</p>
+        <a href="#contact" class="shop-btn">Enquire</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <span class="section-label">Contact</span>
+  <h2 class="section-title">Let's <em>Connect</em></h2>
+  <p class="section-sub">For commissions, enquiries, or just to say hello — I'd love to hear from you.</p>
+
+  <div class="contact-inner">
+    <form id="contactForm" onsubmit="handleSubmit(event)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;">
+        <div class="form-row">
+          <label class="form-label" for="fname">First Name</label>
+          <input class="form-input" type="text" id="fname" placeholder="Rose" required>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="lname">Last Name</label>
+          <input class="form-input" type="text" id="lname" placeholder="Bloom">
+        </div>
+      </div>
+      <div class="form-row">
+        <label class="form-label" for="email">Email</label>
+        <input class="form-input" type="email" id="email" placeholder="hello@email.com" required>
+      </div>
+      <div class="form-row">
+        <label class="form-label" for="subject">Subject</label>
+        <input class="form-input" type="text" id="subject" placeholder="Commission enquiry">
+      </div>
+      <div class="form-row">
+        <label class="form-label" for="message">Message</label>
+        <textarea class="form-textarea" id="message" placeholder="Tell me about your dream painting..." required></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send Message</button>
+    </form>
+    <div class="form-success" id="formSuccess">
+      ✦ &nbsp; Thank you for reaching out! I'll be in touch soon. &nbsp; ✦
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-logo">Nysa Gupta</div>
+  <ul class="footer-links">
+    <li><a href="#gallery">Works</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#">Instagram</a></li>
+  </ul>
+  <p class="footer-copy">&copy; 2026 Nysa Gupta. All rights reserved.</p>
+</footer>
+
+<script>
+  // Gallery filter
+  function filterGallery(btn, cat) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      if (cat === 'all' || item.dataset.cat === cat) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  // Contact form mock submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+
+  // Smooth nav active state on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--deep-rose)' : '';
+    });
+  });
+</script>
+</body>
+</html>
